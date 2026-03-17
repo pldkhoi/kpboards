@@ -40,7 +40,7 @@ function mockResponse<T>(payload: T): Promise<T> {
 }
 
 function isMockModeEnabled(): boolean {
-  return import.meta.env.DEV && env.VITE_AUTH_MOCK_MODE;
+  return import.meta.env.DEV || env.VITE_AUTH_MOCK_MODE;
 }
 
 function filterUsers(searchKey: string): UserType[] {
