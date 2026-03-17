@@ -1,0 +1,36 @@
+---
+description: Git workflow standards including commit messages and PR workflow
+alwaysApply: true
+---
+
+# Git Workflow
+
+## Commit Message Format
+
+```
+<type>: <description>
+
+<optional body>
+```
+
+**Types**: `feat`, `fix`, `refactor`, `docs`, `test`, `chore`, `perf`, `ci`
+
+## Pre-Commit (Automatic)
+
+Husky + lint-staged runs on every commit:
+- `prettier --write` on staged `.ts`, `.tsx`, `.js`, `.jsx`, `.css`, `.json`, `.md`, `.mdx` files
+- `eslint --fix` on staged files
+
+## Feature Implementation
+
+1. **Plan** — Use **planner** agent for complex features
+2. **TDD** — Write tests first with Vitest, then implement
+3. **Review** — Use **code-reviewer** agent after writing code
+4. **Commit** — Atomic commits with conventional commit messages
+
+## Pull Request Workflow
+
+1. Analyze full commit history with `git diff [base-branch]...HEAD`
+2. Draft comprehensive PR summary
+3. Include test plan
+4. Push with `-u` flag if new branch

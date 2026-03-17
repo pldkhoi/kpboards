@@ -1,0 +1,121 @@
+---
+description: Code patterns for TanStack Query, Zustand, React Hook Form, shadcn/Tailwind, and Axios used in this project
+globs:
+  - "src/**/*.{ts,tsx}"
+---
+
+# Common Patterns
+
+## File Naming
+
+All files use **kebab-case**: `use-auth.ts`, `loading-screen.tsx`, `format-number.ts`. Component names in code remain PascalCase.
+
+## Import Paths
+
+Use the `@/` alias for src imports (preferred) or baseUrl paths:
+
+```typescript
+import Logo from '@/components/logo';
+import useAuth from '@/hooks/use-auth';
+import { HOST_API } from '@/config';
+// Equivalent to:
+import Logo from 'components/logo';
+import useAuth from 'hooks/use-auth';
+```
+
+## TanStack Query Hooks
+
+Place query hooks in `src/hooks/` with `use-query-` prefix. Type responses explicitly.
+
+```typescript
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { sendGet, sendPost } from 'utils/axios';
+
+export function useFetchItems(filters?: Filters) {
+  return useQuery({
+    queryKey: ['items', filters],
+    queryFn: () => sendGet<ItemResponse>('/items', { params: filters }),
+  });
+}
+
+export function useCreateItem() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (payload: CreateItemDto) => sendPost('/items', payload),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['items'] }),
+  });
+}
+```
+
+## Zustand Store
+
+Place stores in `src/store/`. Each store is a single file.
+
+```typescript
+import { create } from 'zustand';
+
+interface MyState {
+  count: number;
+  increment: () => void;
+  reset: () => void;
+}
+
+export const useMyStore = create<MyState>((set) => ({
+  count: 0,
+  increment: () => set((state) => ({ count: state.count + 1 })),
+  reset: () => set({ count: 0 }),
+}));
+```
+
+## React Hook Form + Zod
+
+Use pre-built RHF wrappers from `components/form/`.
+
+```typescript
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { FormProvider, RHFTextField } from 'components/form';
+
+const schema = z.object({
+  email: z.string().email('Invalid email').min(1, 'Email is required'),
+  name: z.string().min(1, 'Name is required'),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+function MyForm() {
+  const methods = useForm<FormValues>({ resolver: zodResolver(schema) });
+  const onSubmit = (data: FormValues) => { /* ... */ };
+  return (
+    <FormProvider methods={methods} onSubmit={methods.handleSubmit(onSubmit)}>
+      <RHFTextField name="name" label="Name" />
+      <RHFTextField name="email" label="Email" />
+    </FormProvider>
+  );
+}
+```
+
+## shadcn / Tailwind Component Patterns
+
+```typescript
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+
+function MyComponent() {
+  return (
+    <div className="rounded-lg bg-card p-6">
+      <h2 className="mb-2 text-lg font-semibold">Title</h2>
+      <div className="flex flex-row gap-2">
+        <Button>Action</Button>
+      </div>
+    </div>
+  );
+}
+```
+
+Use `cn()` from `@/lib/utils` for conditional class names. Use shadcn components from `@/components/ui/`. Use Tailwind utility classes for layout and styling.
+
+## Axios Instance
+
+Use the project's configured axios instance from `utils/axios`. Never use raw `fetch` or create new axios instances. Use the helper functions: `sendGet`, `sendPost`, `sendPut`, `sendPatch`, `sendDelete`.

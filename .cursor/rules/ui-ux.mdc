@@ -1,0 +1,13 @@
+---
+description: Compatibility pointer for UI/UX workflow (canonical rule is ui-ux-pro-max.mdc)
+alwaysApply: false
+---
+
+# UI/UX Compatibility Pointer
+
+This file intentionally stays minimal to avoid overlap.
+
+For all active UI/UX requirements and workflow, use:
+
+- `.cursor/rules/ui-ux-pro-max.mdc` (canonical quality rule)
+- `.cursor/skills/ui-ux-pro-max/SKILL.md` (detailed implementation workflow)

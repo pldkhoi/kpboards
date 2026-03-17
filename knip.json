@@ -1,0 +1,16 @@
+{
+  "entry": ["src/index.tsx", "src/App.tsx", "src/routes/index.tsx"],
+  "project": ["src/**/*.ts", "src/**/*.tsx", "vite.config.ts"],
+  "ignore": ["e2e/**", "**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}", "**/*.stories.{ts,tsx}"],
+  "ignoreDependencies": [
+    "@fontsource-variable/geist",
+    "shadcn",
+    "tw-animate-css",
+    "tailwindcss",
+    "vite-plugin-pwa",
+    "workbox-build",
+    "workbox-window",
+    "@vite-pwa/assets-generator",
+    "babel-plugin-react-compiler"
+  ]
+}

@@ -1,0 +1,28 @@
+---
+description: Tool hooks for formatting, linting, and development workflow
+alwaysApply: true
+---
+
+# Hooks System
+
+## PostToolUse
+
+- **Prettier**: After editing `.ts`, `.tsx`, `.js`, `.jsx`, `.css` files, run `bun run prettier` on the file
+- **ESLint**: After editing `.ts`, `.tsx` files, run `bun run lint` to verify no new errors
+- **TypeScript**: After editing `.ts`, `.tsx` files, `vite-plugin-checker` validates types in dev server — check terminal for errors
+- **console.log warning**: Flag `console.log` statements in edited files (remove before commit)
+
+## PreToolUse
+
+- **Long-running commands**: For `bun dev`, `bun run build`, `bun test` — consider backgrounding or using `block_until_ms: 0`
+- **Doc blocker**: Do not create unnecessary `.md` or `.txt` files
+
+## Stop
+
+- **console.log audit**: Check all modified files for leftover `console.log` before ending session
+
+## Formatting Config
+
+- **Prettier**: `printWidth: 100`, `singleQuote: true`, `trailingComma: 'es5'`, `tabWidth: 2`
+- **ESLint 9**: Flat config at `eslint.config.js` — uses `typescript-eslint`, `react`, `react-hooks`, `react-refresh`, `react-compiler`
+- **lint-staged**: Runs Prettier + ESLint on staged files via Husky pre-commit hook

@@ -1,0 +1,41 @@
+---
+description: UI/UX PRO MAX quality bar for professional frontend delivery
+alwaysApply: true
+---
+
+# UI/UX PRO MAX
+
+Apply this quality bar to every frontend implementation:
+
+- Professional visual hierarchy (clear spacing, typography rhythm, strong information architecture)
+- Consistent interaction states (hover, active, focus-visible, disabled, loading, empty, error)
+- Accessibility first (keyboard operability, ARIA semantics, WCAG AA contrast)
+- Responsive behavior at minimum: 320px, 768px, 1024px
+- Reuse existing design tokens and shared components before creating new patterns
+
+## Research + Guidance Workflow
+
+For substantial UI/UX work:
+
+1. Read `.cursor/skills/ui-ux-pro-max/SKILL.md`
+2. Run design-system search:
+   `python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "landing saas boilerplate professional" --design-system -p "KPBoards"`
+3. Run stack guidance:
+   `python3 .cursor/skills/ui-ux-pro-max/scripts/search.py "<feature keywords>" --stack shadcn`
+4. Apply the skill's Pre-Delivery Checklist before final handoff
+
+## Required UX Checklist Before Delivery
+
+- Is the UI readable and balanced without crowded layouts?
+- Are all controls discoverable and accessible by keyboard?
+- Are focus styles obvious and consistent?
+- Are states (loading/empty/error/success) represented clearly?
+- Do copy labels and CTA text read clearly for international users?
+
+## UI Regression Guard
+
+Do not stop at "works". Iterate until:
+
+1. The UI is visually polished
+2. Interaction details feel intentional
+3. Accessibility and responsive checks pass

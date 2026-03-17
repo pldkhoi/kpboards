@@ -1,0 +1,44 @@
+---
+description: Frontend security guidelines for React + Vite applications
+alwaysApply: true
+---
+
+# Security Guidelines
+
+## Before ANY Commit
+
+- [ ] No hardcoded secrets (API keys, passwords, tokens)
+- [ ] Environment variables use `VITE_` prefix and are accessed via `import.meta.env.VITE_*`
+- [ ] No secrets in client-side code (everything in the Vite bundle is public)
+- [ ] User inputs validated (forms use Zod schemas)
+- [ ] XSS prevention: no `dangerouslySetInnerHTML` with unsanitized content
+- [ ] Error messages don't leak internal details
+- [ ] `console.log` statements removed
+
+## Environment Variables
+
+```typescript
+// NEVER hardcode secrets
+const apiKey = 'sk-proj-xxxxx'; // WRONG
+
+// ALWAYS use Vite env vars
+const apiEndpoint = import.meta.env.VITE_API_ENDPOINT;
+
+// CRITICAL: VITE_ vars are embedded in the client bundle — never put true secrets there
+// True secrets belong on the server side only
+```
+
+## Axios / API Security
+
+- Use the project's configured axios instance with interceptors
+- Validate API responses before rendering
+- Handle 401/403 responses consistently (redirect to login)
+- Never send credentials in URL query parameters
+
+## Security Response Protocol
+
+If security issue found:
+1. STOP immediately
+2. Use **security-reviewer** agent
+3. Fix CRITICAL issues before continuing
+4. Rotate any exposed secrets

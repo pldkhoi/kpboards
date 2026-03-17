@@ -1,0 +1,106 @@
+---
+description: Testing patterns and requirements using Vitest and React Testing Library
+globs:
+  - "src/**/*.test.{ts,tsx}"
+  - "src/**/*.spec.{ts,tsx}"
+  - "src/**/__tests__/**"
+---
+
+# Testing with Vitest
+
+## Framework
+
+- **Vitest 4** (not Jest) — `bun run test` for watch mode, `bun run test:run` for CI/local deterministic checks
+- **@testing-library/react** for component tests
+- **Coverage target**: 80%+ (branches, functions, lines, statements)
+
+## TDD Workflow
+
+1. Write failing test (RED)
+2. Write minimal implementation (GREEN)
+3. Refactor (IMPROVE)
+4. Verify coverage (`bun run test:coverage`)
+
+## Unit Tests
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { formatCurrency } from 'utils/formatting';
+
+describe('formatCurrency', () => {
+  it('formats positive amounts', () => {
+    expect(formatCurrency(1234.56)).toBe('$1,234.56');
+  });
+  it('handles zero', () => {
+    expect(formatCurrency(0)).toBe('$0.00');
+  });
+});
+```
+
+## Component Tests
+
+Use `renderWithProviders` from `@/test/test-utils` (wraps QueryClientProvider + MemoryRouter). No MUI ThemeProvider needed — project uses shadcn/Tailwind.
+
+```typescript
+import { describe, it, expect } from 'vitest';
+import { renderWithProviders, screen } from '@/test/test-utils';
+import MyComponent from 'components/MyComponent';
+
+describe('MyComponent', () => {
+  it('renders heading', () => {
+    renderWithProviders(<MyComponent />);
+    expect(screen.getByRole('heading')).toHaveTextContent('Title');
+  });
+});
+```
+
+## Hook Tests (TanStack Query)
+
+```typescript
+import { renderHook, waitFor } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useFetchItems } from 'hooks-query/useFetchItems';
+
+const createWrapper = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  return ({ children }: { children: React.ReactNode }) => (
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+  );
+};
+
+describe('useFetchItems', () => {
+  it('returns loading initially', () => {
+    const { result } = renderHook(() => useFetchItems(), {
+      wrapper: createWrapper(),
+    });
+    expect(result.current.isLoading).toBe(true);
+  });
+});
+```
+
+## Mocking with Vitest
+
+```typescript
+import { vi } from 'vitest';
+
+// Mock module
+vi.mock('utils/axios', () => ({
+  default: { get: vi.fn(), post: vi.fn() },
+}));
+
+// Mock function
+const onSubmit = vi.fn();
+
+// Spy
+const spy = vi.spyOn(console, 'error').mockImplementation(() => {});
+```
+
+## Edge Cases to Cover
+
+1. Null/undefined inputs
+2. Empty arrays/strings/objects
+3. Error states (network failures, validation errors)
+4. Loading states
+5. Boundary values

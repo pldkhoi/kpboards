@@ -1,0 +1,32 @@
+---
+description: Use current date and fetch fresh data when needed — web search, docs, libraries
+alwaysApply: true
+---
+
+# Fresh Data & Current Date
+
+## Current context
+
+- **Today's date**: 14 March 2026
+- Prefer current information over training data for time-sensitive topics
+
+## When to search for fresh data
+
+- Library/package versions, APIs, or breaking changes
+- Cursor IDE features, settings, or agent capabilities
+- Framework docs (React, Vite, TanStack, etc.)
+- Security best practices or CVEs
+- Any topic where accuracy depends on recency
+
+## How to get current data
+
+1. **Web search** — Use web search tool for docs, changelogs, tutorials
+2. **Official docs** — Fetch from project/library documentation URLs
+3. **Package registries** — Check npm/bun for latest versions when relevant
+4. **Release notes** — Prefer changelogs over generic descriptions
+
+## Avoid
+
+- Assuming API shapes or behavior from memory alone
+- Using deprecated patterns without checking current recommendations
+- Hardcoding dates; use today (14 Mar 2026) when dates are needed

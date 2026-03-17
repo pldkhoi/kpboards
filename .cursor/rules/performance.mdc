@@ -1,0 +1,41 @@
+---
+description: Performance optimization strategies for React, Vite, and AI assistant usage
+alwaysApply: true
+---
+
+# Performance
+
+## React Performance
+
+- Use `React.memo()` for components receiving stable props
+- Use `useMemo` / `useCallback` for expensive computations and stable references
+- React Compiler (enabled via Babel plugin) auto-optimizes — avoid unnecessary manual memoization
+- Lazy load routes with `React.lazy()` + `Suspense`
+- Use Skeleton components (e.g. shadcn Skeleton) for loading states
+- Avoid inline object/array creation in JSX props
+
+## Vite Build Optimization
+
+- Chunk size warning at 1600 KB — split large vendor chunks
+- Use dynamic `import()` for heavy libraries (e.g., chart libs, editors)
+- Tree-shake: import from specific paths for large libraries
+- Images in `public/` are copied as-is; images in `src/assets/` are processed
+
+## TanStack Query Performance
+
+- Set appropriate `staleTime` to avoid unnecessary refetches
+- Use `placeholderData` for instant UI while fetching
+- Prefetch data for likely next pages
+
+## Model Selection
+
+- **Fast model**: Single-file edits, utility functions, simple fixes
+- **Default model**: Feature implementation, multi-file changes, complex coding
+- **Capable model**: Architecture decisions, deep debugging, research
+
+## Build Troubleshooting
+
+If build fails:
+1. Use **build-error-resolver** agent
+2. Check `vite-plugin-checker` output in terminal
+3. Fix incrementally, verify after each fix

@@ -1,0 +1,48 @@
+---
+description: Agent orchestration guide - when and how to use different agents
+alwaysApply: true
+---
+
+# Agent Orchestration
+
+## Available Agents
+
+| Agent                | Purpose                 | When to Use                   |
+| -------------------- | ----------------------- | ----------------------------- |
+| planner              | Implementation planning | Complex features, refactoring |
+| architect            | System design           | Architectural decisions       |
+| tdd-guide            | Test-driven development | New features, bug fixes       |
+| code-reviewer        | Code review             | After writing code            |
+| security-reviewer    | Security analysis       | Before commits                |
+| build-error-resolver | Fix build errors        | When Vite build or tsc fails  |
+| e2e-runner           | E2E testing             | Critical user flows           |
+| refactor-cleaner     | Dead code cleanup       | Code maintenance              |
+| doc-updater          | Documentation           | Updating docs                 |
+
+## Immediate Agent Usage
+
+1. Complex feature requests → **planner**
+2. Code just written/modified → **code-reviewer**
+3. Bug fix or new feature → **tdd-guide**
+4. Architectural decision → **architect**
+5. Vite build or TypeScript errors → **build-error-resolver**
+6. UI/UX design, layout, or styling → use the **ui-ux-pro-max skill workflow** (`.cursor/skills/ui-ux-pro-max/SKILL.md`)
+
+## Autonomous Mode
+
+When user requests "autonomous", "do everything", or "24/7" execution — see `.cursor/rules/autonomous-workflow.mdc`. Proceed without waiting for approval; user reviews at the end.
+
+## MCP Tools
+
+When adding or discovering shadcn/ui components, use the **shadcn MCP** (if enabled) to search registries and get accurate component specs. See `docs/MCP.md` for setup and prompts.
+
+## Parallel Task Execution
+
+ALWAYS use parallel Task execution for independent operations:
+
+```markdown
+# GOOD: Launch 3 agents in parallel
+1. Agent 1: Security analysis of auth code
+2. Agent 2: Performance review of components
+3. Agent 3: Type checking of utils
+```

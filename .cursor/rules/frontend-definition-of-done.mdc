@@ -1,0 +1,35 @@
+---
+description: Frontend definition of done with verification, accessibility, and docs parity
+alwaysApply: true
+---
+
+# Frontend Definition of Done
+
+A frontend task is done only when all apply:
+
+## Functional + UX
+
+- Behavior matches request and existing route/auth intent
+- Loading/empty/error/success states are implemented where relevant
+- UI is responsive at 320px, 768px, 1024px
+
+## Accessibility + i18n
+
+- Keyboard navigation works for all primary interactions
+- ARIA labels/roles are present where semantic HTML is insufficient
+- Focus-visible is clear and contrast meets WCAG AA intent
+- New user-facing strings are i18n-ready
+
+## Engineering Quality
+
+- `bun run type-check` passes
+- `bun run lint` passes
+- `bun run build` passes
+- `bun run test:run` passes
+- `bun run test:e2e` passes for UI/route changes (or blocker is explicitly documented)
+
+## Maintainability
+
+- Reusable abstractions preferred over duplication
+- No dead code introduced
+- Docs/routes references stay consistent when changed

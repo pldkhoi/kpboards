@@ -1,0 +1,71 @@
+---
+description: Core development context for this React + Vite + TypeScript boilerplate
+alwaysApply: true
+---
+
+# Project Stack
+
+- **React 19** with React Compiler (Babel)
+- **Vite 7** dev server (port 3000) and bundler
+- **TypeScript 5.9** (strict mode, baseUrl: `./src`)
+- **shadcn/ui** + **Tailwind CSS 4** for styling
+- **React Router 7** (useRoutes)
+- **Zustand** for client state
+- **TanStack React Query** for server state
+- **React Hook Form** + Zod for forms
+- **Axios** for HTTP
+- **i18next** for internationalization
+- **Framer Motion** for animations
+- **ESLint 9** flat config + **Prettier** + **Husky** + lint-staged
+- **Vitest 4** for testing
+
+## Key Commands
+
+```bash
+bun dev           # Start dev server (port 3000)
+bun run build     # Production build
+bun run lint      # ESLint check
+bun run lint:fix  # ESLint auto-fix
+bun run prettier  # Prettier format
+bun run type-check  # TypeScript type checking
+bun run test      # Vitest watch mode
+bun run test:run  # Vitest CI/deterministic mode
+```
+
+## Project Structure
+
+```
+src/
+├── assets/         # Static assets (icons, images, animations)
+├── components/     # Reusable UI components
+│   ├── animate/    # Framer Motion wrappers
+│   ├── form/       # React Hook Form + shadcn wrappers
+│   ├── settings/   # Theme settings drawer
+│   ├── table/      # Table utilities
+│   └── upload/     # File upload components
+├── config.ts       # App configuration and env vars
+├── contexts/       # React contexts (Auth, Settings)
+├── guards/         # Route guards (Auth, Guest, Role)
+├── hooks/          # Custom hooks + TanStack Query hooks
+├── layouts/        # Page layouts (Main, Dashboard, Minimal)
+├── locales/        # i18n translations
+├── pages/          # Route pages
+├── routes/         # Route definitions and paths
+├── features/       # Page-specific feature sections
+├── services/       # API service layer
+├── store/          # Zustand stores
+├── theme-provider.tsx  # Minimal theme (dark mode, dir via ThemeVariablesProvider)
+├── types/          # Shared TypeScript types
+└── utils/          # Utility functions
+```
+
+## Conventions
+
+- **File names**: kebab-case (`use-auth.ts`, `loading-screen.tsx`)
+- **Component names**: PascalCase in code (`function LoadingScreen()`)
+- **Imports**: Prefer `@/` alias for all internal imports (e.g. `@/components/logo`, `@/hooks/use-auth`, `@/utils/axios`). BaseUrl paths (`components/logo`, `hooks/use-auth`) are acceptable for short paths. Never use relative `../../` beyond one level.
+- Components use Tailwind classes via `className` and `cn()`
+- Colors and spacing from CSS variables (e.g. `--primary`, `--muted`) or Tailwind theme
+- Environment variables prefixed with `VITE_`
+- No `React.FC` — use plain function components with typed props
+- Prefer `interface` over `type` for component props

@@ -1,0 +1,30 @@
+---
+description: Code review checklist for React, TypeScript, and shadcn/Tailwind code changes
+---
+
+# Code Review Checklist
+
+## Priority Order
+
+1. **Critical** — Security vulnerabilities, data loss risks
+2. **High** — Logic errors, missing error handling, type safety
+3. **Medium** — Performance, accessibility, readability
+4. **Low** — Style, naming, minor improvements
+
+## Review Checks
+
+- [ ] No hardcoded secrets or `VITE_` env values in source
+- [ ] TypeScript: no `any` types, proper generics
+- [ ] Error handling: try/catch on async operations, error boundaries
+- [ ] Styling: use Tailwind classes via `className` and `cn()`; CSS variables (e.g. `--primary`, `--muted`) for colors
+- [ ] React: hooks rules followed, no unnecessary re-renders
+- [ ] React Query: proper queryKey structure, error/loading states handled
+- [ ] Forms: Zod validation schema covers all fields
+- [ ] i18n: user-facing strings use `t()` translation function
+- [ ] No `console.log` in production code
+- [ ] Accessibility: semantic HTML, ARIA labels where needed (alt on images, aria-label on icon buttons, focus order; jsx-a11y rules enabled)
+- [ ] Bundle size: avoid barrel imports from large libraries; prefer tree-shakeable imports
+
+## Output Format
+
+Group findings by file, highest severity first. Provide specific code fixes.

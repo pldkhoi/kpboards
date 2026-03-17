@@ -1,0 +1,162 @@
+{
+  "name": "kpboards",
+  "version": "1.0.0",
+  "packageManager": "bun@1.3.3",
+  "private": true,
+  "type": "module",
+  "description": "Production-ready React + Vite + TypeScript + shadcn/Tailwind with auth, i18n, theming, and more.",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite --host",
+    "preview": "vite preview",
+    "build": "vite build",
+    "build:dev": "vite build --mode development",
+    "build:staging": "vite build --mode staging",
+    "build:prod": "vite build --mode production",
+    "build:analyze": "ANALYZE=true vite build --mode production",
+    "lint": "eslint \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{ts,tsx}\"",
+    "prettier": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,json,md,mdx}\" \"*.json\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,css,json,md,mdx}\" \"tsconfig*.json\" \"knip.json\" \"components.json\"",
+    "type-check": "tsc --noEmit",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:run": "vitest run",
+    "verify": "bun run type-check && bun run build && bun run lint && bun run test:run && bun run test:e2e",
+    "test:lighthouse": "lhci autorun",
+    "knip": "knip",
+    "clean": "rm -rf node_modules dist build coverage .lighthouseci playwright-report test-results storybook-static debug-storybook.log",
+    "prepare": "husky",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "size": "size-limit"
+  },
+  "size-limit": [
+    {
+      "path": "dist/js/index-*.js",
+      "limit": "500 KB"
+    },
+    {
+      "path": "dist/js/vendor-*.js",
+      "limit": "1400 KB"
+    }
+  ],
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.2.0",
+    "@fontsource-variable/geist": "^5.2.8",
+    "@hookform/resolvers": "^5.2.2",
+    "@tanem/react-nprogress": "^6.0.3",
+    "@tanstack/react-query": "^5.90.21",
+    "@tanstack/react-query-devtools": "^5.91.3",
+    "@tanstack/react-table": "^8.21.3",
+    "axios": "^1.13.6",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "dayjs": "^1.11.19",
+    "framer-motion": "^12.34.5",
+    "i18next": "^25.8.13",
+    "i18next-browser-languagedetector": "^8.2.1",
+    "jwt-decode": "^4.0.0",
+    "lucide-react": "^0.577.0",
+    "react": "^19.2.4",
+    "react-day-picker": "^9.14.0",
+    "react-dom": "^19.2.4",
+    "react-dropzone": "^15.0.0",
+    "react-hook-form": "^7.71.2",
+    "react-i18next": "^16.5.4",
+    "react-lazy-load-image-component": "^1.6.3",
+    "react-router": "^7.13.1",
+    "recharts": "^3.8.0",
+    "shadcn": "^4.0.0",
+    "simplebar-react": "^3.3.2",
+    "sonner": "^2.0.7",
+    "tailwind-merge": "^3.5.0",
+    "tw-animate-css": "^1.4.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^5.0.1",
+    "@commitlint/cli": "^20.4.3",
+    "@commitlint/config-conventional": "^20.4.3",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.58.2",
+    "@size-limit/file": "^12.0.1",
+    "@storybook/addon-a11y": "^10.2.17",
+    "@storybook/addon-docs": "^10.2.17",
+    "@storybook/addon-onboarding": "^10.2.17",
+    "@storybook/addon-vitest": "^10.2.17",
+    "@storybook/react-vite": "^10.2.17",
+    "@tailwindcss/vite": "^4.2.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.3.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-lazy-load-image-component": "^1.6.5",
+    "@vite-pwa/assets-generator": "^1.0.2",
+    "@vitejs/plugin-react": "^5.1.4",
+    "@vitest/browser-playwright": "4.0.18",
+    "@vitest/coverage-v8": "4.0.18",
+    "babel-plugin-react-compiler": "^1.0.0",
+    "eslint": "^9.39.3",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.3",
+    "eslint-plugin-react-compiler": "^19.1.0-rc.2",
+    "eslint-plugin-react-hooks": "7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "husky": "^9.1.7",
+    "jsdom": "^28.1.0",
+    "knip": "^5.86.0",
+    "lint-staged": "^16.3.2",
+    "playwright": "^1.58.2",
+    "prettier": "^3.8.1",
+    "prettier-plugin-organize-imports": "^4.3.0",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "size-limit": "^12.0.1",
+    "storybook": "^10.2.17",
+    "tailwindcss": "^4.2.1",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vite": "^7.3.1",
+    "vite-plugin-checker": "^0.12.0",
+    "vite-plugin-pwa": "^1.2.0",
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4.0.18",
+    "workbox-build": "^7.4.0",
+    "workbox-window": "^7.4.0"
+  },
+  "resolutions": {
+    "serialize-javascript": "^7.0.3"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "src/**/*.{css,json,md,mdx}": [
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "prettier --write"
+    ],
+    "tsconfig*.json": [
+      "prettier --write"
+    ]
+  }
+}

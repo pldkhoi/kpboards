@@ -1,0 +1,43 @@
+---
+description: Autonomous feature development — think, plan, do, review, test
+alwaysApply: true
+---
+
+# Autonomous Workflow (24/7)
+
+**Boilerplate spec**: See `docs/BOILERPLATE.md` for component inventory, pages, UI/UX, and examples.
+**Frontend detail rules**: Pair with `frontend-autonomous-loop.mdc` and `frontend-definition-of-done.mdc`.
+
+## Use Skill
+
+For practical execution playbooks and reusable prompt templates, use:
+
+- `.cursor/skills/autonomous-builder-pro/SKILL.md`
+
+## Full cycle: Think → Plan → Do → Review → Test
+
+1. **Think** — Understand the idea, consider alternatives, choose the best approach. Search web/docs for current best practices when needed.
+2. **Plan** — Create implementation plan (phases, steps, risks). Do NOT wait for approval unless user says "plan only".
+3. **Do** — Implement following project conventions. Use planner subagent for complex tasks.
+4. **Review** — Run code-reviewer, apply security checklist. Fix issues before presenting.
+5. **Test** — Run `bun run type-check`, `bun run lint`, `bun run build`, `bun run test:run`, `bun run test:e2e` (UI/route changes). Fix failures before delivery.
+
+## Mandatory verification before "done"
+
+- `bun run type-check` — no TypeScript errors
+- `bun run lint` — no ESLint errors
+- `bun run build` — production build succeeds
+- `bun run test:run` — unit tests pass deterministically
+- `bun run test:e2e` — browser tests pass (home, admin, dashboard load; no console errors), or blocker is documented with evidence
+
+## Do NOT ask for approval on
+
+- Creating/modifying non-config project files
+- Running lint, build, test, test:e2e (if allowlisted)
+- Invoking planner, tdd-guide, code-reviewer, security-reviewer subagents
+
+## Token optimization
+
+- Use semantic search before broad exploration
+- Batch related edits in single tool calls
+- Compact context after completing each phase

@@ -1,0 +1,28 @@
+---
+description: Enforce design-system-first implementation and reusable UI patterns
+globs:
+  - "src/**/*.{ts,tsx,css}"
+alwaysApply: false
+---
+
+# Design System Enforcement
+
+## Build Order
+
+1. Reuse existing primitives in `src/components/ui/`
+2. Reuse existing wrappers in `src/components/`
+3. Add composable wrapper only if required by domain behavior
+4. Add new primitive only when no existing primitive can satisfy requirements
+
+## Consistency Rules
+
+- Prefer shared spacing and typography rhythm used by existing pages/layouts
+- Keep component APIs minimal, typed, and composable
+- Avoid one-off style islands; align with tokens/presets
+- Keep primitives behavior-light and app wrappers behavior-rich
+
+## Interaction Rules
+
+- Every interactive control has hover + focus-visible styles
+- Motion is subtle and purposeful (avoid noisy animation)
+- Visual feedback for async actions is mandatory

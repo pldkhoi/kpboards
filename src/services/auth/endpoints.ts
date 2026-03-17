@@ -1,0 +1,10 @@
+export const LOGOUT = '/api/auth/smart-logout';
+export const RESET_PASSWORD = '/api/auth/reset-password';
+export const REFRESH_TOKEN = '/api/auth/refreshtoken';
+export const LOGIN = '/api/auth/login';
+export const REGISTER = '/api/auth/register';
+export const FORGET_PASSWORD = '/api/auth/forget-password';
+export const CHECK_RESET_TOKEN = '/api/auth/check-reset-token';
+export const CHANGE_PASSWORD = '/api/auth/change-password';
+export const VERIFY_EMAIL = '/api/auth/verify-email';
+export const VERIFY_OTP = '/api/auth/verify-otp';

@@ -1,0 +1,25 @@
+# Build outputs
+dist
+build
+node_modules
+coverage
+storybook-static
+.lighthouseci
+playwright-report
+test-results
+debug-storybook.log
+
+# Lockfiles and package manifest (format manually if needed)
+bun.lockb
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
+package.json
+
+# Minified
+*.min.js
+*.min.css
+
+# Chunk files
+**/js/*-[a-f0-9]*.js
+**/assets/*-[a-f0-9]*

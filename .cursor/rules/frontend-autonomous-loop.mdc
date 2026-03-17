@@ -1,0 +1,29 @@
+---
+description: Autonomous frontend execution loop with phased delivery and persistence
+alwaysApply: true
+---
+
+# Frontend Autonomous Loop
+
+For frontend requests, execute in this loop unless user asks "plan only":
+
+1. Clarify goal and constraints from context
+2. Break work into phases if scope is large
+3. Implement phase-by-phase without waiting for repeated approval
+4. Validate each phase before moving on
+5. Run final full verification and report outcomes
+
+## Large Task Behavior
+
+- Decompose into explicit phases with acceptance criteria
+- Track progress with todo updates (one item in progress at a time)
+- If blocked, state blocker and continue on parallel unblocked work
+- Resume from last completed phase automatically in follow-up turns
+
+## Quality Loop
+
+After each substantial change:
+
+- Run formatter/lint/type checks relevant to touched files
+- Perform a quick UX/a11y sanity pass
+- Apply code-reviewer findings before final handoff

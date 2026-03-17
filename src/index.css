@@ -1,0 +1,290 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+@import '@fontsource-variable/geist';
+
+@custom-variant dark (&:is(.dark *));
+
+/* Breakpoints - match MUI: sm:600, md:900, lg:1366, xl:1536 */
+@theme {
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 900px;
+  --breakpoint-lg: 1366px;
+  --breakpoint-xl: 1536px;
+}
+
+/* Bridge MUI palette to shadcn - primary=GREEN_NEON, secondary=purple, destructive=RED */
+:root {
+  --background: #f4f7f2;
+  --foreground-base: #122320;
+  --foreground: var(--foreground-base);
+  --card: rgba(255, 255, 255, 0.82);
+  --card-foreground: #122320;
+  --popover: rgba(255, 255, 255, 0.96);
+  --popover-foreground: #122320;
+  --primary: #0f8f7b;
+  --primary-soft: #d8f1eb;
+  --primary-strong: #0d6f60;
+  --primary-foreground: #f4fffc;
+  --secondary: #123548;
+  --secondary-foreground: #eef8ff;
+  --muted-base: #e4ece7;
+  --muted: var(--muted-base);
+  --muted-foreground-base: #58706a;
+  --muted-foreground: var(--muted-foreground-base);
+  --accent: var(--primary-soft);
+  --accent-foreground: var(--primary-strong);
+  --destructive: #d44a41;
+  --border-base: rgba(18, 35, 32, 0.12);
+  --border: var(--border-base);
+  --input: rgba(255, 255, 255, 0.86);
+  --ring-base: rgba(15, 143, 123, 0.45);
+  --ring: var(--ring-base);
+  --chart-1: #0f8f7b;
+  --chart-2: #1270a1;
+  --chart-3: #f59e0b;
+  --chart-4: #6d52f0;
+  --chart-5: #e85d52;
+  --radius: 1rem;
+  --sidebar: #0f1723;
+  --sidebar-foreground: #d8e6ef;
+  --sidebar-primary: #0f8f7b;
+  --sidebar-primary-foreground: #f4fffc;
+  --sidebar-accent: rgba(255, 255, 255, 0.08);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: rgba(15, 143, 123, 0.45);
+}
+
+/* Dark mode (applied when .dark on html) */
+.dark {
+  --background: #09111a;
+  --foreground-base: #edf4f8;
+  --foreground: var(--foreground-base);
+  --card: rgba(17, 28, 39, 0.88);
+  --card-foreground: #edf4f8;
+  --popover: rgba(13, 21, 31, 0.96);
+  --popover-foreground: #edf4f8;
+  --muted-base: rgba(255, 255, 255, 0.06);
+  --muted: var(--muted-base);
+  --muted-foreground-base: #97acb8;
+  --muted-foreground: var(--muted-foreground-base);
+  --accent: rgba(15, 143, 123, 0.18);
+  --accent-foreground: #d7fff6;
+  --border-base: rgba(255, 255, 255, 0.09);
+  --border: var(--border-base);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring-base: rgba(39, 196, 164, 0.42);
+  --ring: var(--ring-base);
+  --sidebar: #08111a;
+  --sidebar-foreground: #d8e6ef;
+  --sidebar-accent: rgba(255, 255, 255, 0.06);
+}
+
+@theme inline {
+  --font-sans: 'Geist Variable', sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+/* Theme-controlled global typography scale */
+html {
+  font-size: var(--app-font-size, 16px);
+}
+
+/* Contrast profiles */
+html.contrast-soft {
+  --foreground: color-mix(in oklch, var(--foreground-base) 85%, white);
+  --muted: color-mix(in oklch, var(--muted-base) 85%, white);
+  --muted-foreground: color-mix(in oklch, var(--muted-foreground-base) 80%, white);
+  --border: color-mix(in oklch, var(--border-base) 72%, white);
+  --ring: color-mix(in oklch, var(--ring-base) 75%, white);
+}
+
+html.contrast-default {
+  --foreground: var(--foreground-base);
+  --muted: var(--muted-base);
+  --muted-foreground: var(--muted-foreground-base);
+  --border: var(--border-base);
+  --ring: var(--ring-base);
+}
+
+html.contrast-bold {
+  --foreground: color-mix(in oklch, var(--foreground-base) 92%, black);
+  --muted: color-mix(in oklch, var(--muted-base) 94%, black);
+  --muted-foreground: color-mix(in oklch, var(--muted-foreground-base) 92%, black);
+  --border: color-mix(in oklch, var(--border-base) 88%, black);
+  --ring: color-mix(in oklch, var(--ring-base) 92%, black);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image:
+      radial-gradient(
+        circle at top left,
+        color-mix(in srgb, var(--primary) 14%, transparent) 0,
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at top right,
+        color-mix(in srgb, var(--secondary) 10%, transparent) 0,
+        transparent 24%
+      ),
+      linear-gradient(
+        180deg,
+        color-mix(in srgb, var(--background) 70%, white) 0%,
+        var(--background) 40%,
+        color-mix(in srgb, var(--background) 96%, #dfe9e4) 100%
+      );
+    background-attachment: fixed;
+  }
+  html {
+    @apply font-sans;
+  }
+  ::selection {
+    background: color-mix(in srgb, var(--primary) 24%, transparent);
+  }
+  #root {
+    min-height: 100vh;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.4), transparent 80%);
+    opacity: 0.25;
+  }
+  *::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--foreground) 16%, transparent);
+    border: 2px solid transparent;
+    border-radius: 999px;
+    background-clip: padding-box;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@keyframes landing-grid-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes landing-noise-shift {
+  0% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+}
+
+@layer components {
+  .landing-grid {
+    inset: -10% -8%;
+    background-image:
+      linear-gradient(
+        to right,
+        color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
+        transparent 1px
+      );
+    background-size: 72px 72px;
+    mask-image: radial-gradient(circle at center, black 20%, transparent 78%);
+    opacity: 0.28;
+    animation: landing-grid-drift 24s linear infinite;
+  }
+
+  .landing-noise {
+    background-image:
+      radial-gradient(
+        circle at 18% 22%,
+        color-mix(in srgb, var(--primary) 14%, transparent) 0,
+        transparent 34%
+      ),
+      radial-gradient(
+        circle at 84% 18%,
+        color-mix(in srgb, var(--primary-strong) 14%, transparent) 0,
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 55% 88%,
+        color-mix(in srgb, var(--foreground) 8%, transparent) 0,
+        transparent 36%
+      );
+    animation: landing-noise-shift 18s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-grid,
+  .landing-noise {
+    animation: none;
+  }
+}

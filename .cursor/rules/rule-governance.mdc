@@ -1,0 +1,37 @@
+---
+description: Rule precedence and conflict-resolution map for consistent autonomous execution
+alwaysApply: true
+---
+
+# Rule Governance
+
+Use this precedence when multiple rules could apply:
+
+1. **Security and safety first** (`security.mdc`)
+2. **Core project conventions** (`dev.mdc`, `common-patterns.mdc`)
+3. **Execution model** (`autonomous-workflow.mdc`, `frontend-autonomous-loop.mdc`)
+4. **Frontend quality gates** (`ui-ux-pro-max.mdc`, `frontend-definition-of-done.mdc`, `design-system-enforcement.mdc`)
+5. **Task-specific guidance** (`testing.mdc`, `performance.mdc`, `git-workflow.mdc`, `review.mdc`, `research.mdc`)
+
+`ui-ux.mdc` is a compatibility pointer only and is non-canonical.
+
+## Canonical Validation Order
+
+For implementation tasks, use this final sequence:
+
+`bun run type-check` -> `bun run lint` -> `bun run build` -> `bun run test:run` -> `bun run test:e2e` (for UI/route changes)
+
+If e2e is blocked by environment instability, document the blocker clearly and continue with all other gates passing.
+
+## Conflict Resolution Rules
+
+- Prefer **more specific scope** (`globs`) over broad generic instruction
+- Prefer **newer specialized frontend rules** for UI work
+- Never weaken security/accessibility requirements to satisfy style-only preferences
+- Do not introduce duplicate abstractions when an existing primitive/wrapper solves the need
+
+## Expected Delivery Standard
+
+- Autonomous phased execution for large tasks
+- Accessibility + responsive + i18n readiness for user-facing frontend changes
+- Reusable patterns over one-off implementations
